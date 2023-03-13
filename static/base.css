@@ -1,0 +1,13 @@
+main,
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+}
+.nav-links {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
