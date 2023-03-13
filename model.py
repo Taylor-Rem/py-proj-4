@@ -16,6 +16,15 @@ class User(db.Model):
   def __init__(self, username, password):
     self.username = username
     self.password = password
+  
+  def get_all_projects(self):
+    projects = []
+
+    for team in self.teams:
+      for project in team.projects:
+        projects.append(project)
+    
+    return projects
 
 class Team(db.Model):
 
@@ -24,6 +33,8 @@ class Team(db.Model):
   id = db.Column(db.Integer, primary_key = True, autoincrement = True)
   team_name = db.Column(db.String(255), unique = True, nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
+
+  projects = db.relationship('Project', backref = 'team', lazy = True)
 
   def __init__(self, team_name, user_id):
     self.team_name = team_name
